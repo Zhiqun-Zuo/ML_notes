@@ -34,7 +34,7 @@ The tool produce two critical matrices: ```Bandwidth``` (GB/s) and ```Latency```
 * **Expected Healthy Latency**:
   * **NVLink**: < 2.0 us
   * **PCIe (PXB/PHB)**: 10 -20 us
-* **The "Red Flag" (Hardware/Firmware Issue):
+* **The "Red Flag" (Hardware/Firmware Issue)**:
   * If latency spikes to **1000+ us** or the program **hangs** during a specific pair's test, the physical link is failing.
   * If **P2P=Disabled** is faster than **P2P=Enabled**, the PCIe Switch/IOMMU is bottlenecking the direct DMA transfer.
 
@@ -49,7 +49,7 @@ Run the compiled ```test_p2p```.
 * **Scenario A (Program Hangs)**: If the test freezes at ```Testing P2P Bandwidth...```, the hardware is triggering PCIe retries. Manual intervention (BIOS/Replacement) is likely needed.
 * **Scenario B (Latency Anomaly)**: Identify the specific pairs with high latency.
 
-#### **Phase 3: Immediate Mitigation (The "Hot-Fix")
+#### **Phase 3: Immediate Mitigation (The "Hot-Fix")**
 If you cannot wait for IT to fix the hardware:
 1. **Isolation**: Use ```export CUDA_VISIBLE_DEVICES=X,Y``` to only use GPUs with healthy (NVLink) paths.
 2. **Protocal Fallback**: Force NCCL to avoid the broken P2P path and use CPU memory instead:
